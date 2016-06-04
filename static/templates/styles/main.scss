@@ -1,0 +1,187 @@
+// variables
+// -----------------------------------------------------------------------------
+$full: 100%;
+$one: 1em;
+$rne: 1rem;
+$zed: 0;
+$min-height: 200px;
+$sm-cont-height: 15vh;
+$center: center;
+
+// mixins
+// -----------------------------------------------------------------------------
+@mixin zeroOut {
+  padding: $zed;
+  margin: $zed;
+}
+
+@mixin flex {
+  -webkit-display: flexbox;
+  display: flex;
+}
+
+@mixin center-content {
+  -webkit-justify-content: $center;
+  justify-content: $center;
+}
+
+@mixin align-center {
+  -webkit-align-content: $center;
+  align-content: $center;
+}
+
+@mixin align-items {
+  -webkit-align-items: $center;
+  align-items: $center;
+}
+
+@mixin index-link-headline {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// global styles
+// -----------------------------------------------------------------------------
+body, .outer-wrapper {
+  width: $full;
+  @include zeroOut;
+  font-size: 16px;
+  p {
+    line-height: 1.5;
+  }
+}
+
+.outer-wrapper {
+  h1, h2, h3 {
+    margin: $one;
+  }
+  ul {
+    list-style-type: none;
+    @include zeroOut;
+    li {
+      padding: $one;
+    }
+  }
+  p {
+    padding: $one;
+  }
+  .index-link-headline {
+    @include index-link-headline;
+  }
+  .global-header {
+    @include flex;
+    .global-nav {
+      margin-left: auto;
+      ul {
+        @include flex;
+        li {
+          align-self: $center;
+        }
+      }
+    }
+  }
+  .global-footer {
+    height: 25vh;
+    min-height: 200px;
+    width: $full;
+    background-color: #777; // fpo
+    .footer-links {
+      @include flex;
+      .left-cont, .right-cont {
+        width: $full/2;
+      }
+    }
+    .footer-site-details {
+      .site-headline {
+        h3 {
+          margin: $zed $one*.8;
+        }
+      }
+    }
+  }
+  .inner-wrapper {
+    width: $full;
+    max-width: 1200px;
+    margin: $zed auto;
+  }
+}
+
+// index
+.outer-wrapper {
+  .hero {
+    width: $full;
+    //background-image: url('../../../images/landscape.jpg');
+    background-color: #999; // placeholder
+    background-size: cover;
+    background-position: center bottom;
+    height: 60vh;
+    min-height: 450px;
+    .inner-wrapper {
+      @include flex;
+      height: inherit;
+      article {
+        width: $full/2;
+        align-self: $center;
+        box-sizing: border-box;
+        h1, h3 {
+          margin: $zed;
+        }
+        h1 {
+          font-size: $one*2.5;
+          padding: $zed $zed $one*.5;
+        }
+        h3 {
+          font-size: $one*1.3;
+          padding: $one*.5 $zed $one;
+        }
+        p {
+          margin: $zed;
+          padding: $zed;
+        }
+      }
+    }
+  }
+  .project-list-section {
+    .inner-wrapper {
+      .index-headline {
+        height: $sm-cont-height;
+        min-height: $min-height;
+        @include flex;
+        > h2 {
+          font-size: $one*2.5;
+          margin: $zed;
+          margin-left: auto;
+          align-self: $center;
+        }
+      }
+      .projects {
+        @include flex;
+        margin: $zed $zed $one*6;
+        .project-category {
+          background-color: #999; // fpo
+          height: $sm-cont-height;
+          min-height: $min-height;
+          width: $full*.25;
+          margin: $zed $one;
+          box-sizing: border-box;
+          @include flex;
+          @include center-content;
+          &:first-child {
+            margin-left: $zed;
+          }
+          &:last-child {
+            margin-right: $zed;
+          }
+          .center-self {
+            align-self: $center;
+          }
+          h2, h3 {
+            margin: $zed;
+          }
+        }
+      }
+    }
+  }
+}
